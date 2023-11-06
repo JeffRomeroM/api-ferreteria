@@ -27,6 +27,14 @@ export class CreateProductDto {
   @IsOptional()
   stock: number;
 
+  @IsNumber()
+  @IsOptional()
+  supplier_id: number;
+
+  @IsNumber()
+  @IsOptional()
+  user_id: number;
+
   @IsString()
   @IsOptional()
   filename: string;

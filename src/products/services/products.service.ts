@@ -39,9 +39,9 @@ export class ProductsService{
 
     
     //actualizar una producto
-    async update(id: number, cambios: CreateProductDto){
+    async update(id: number, changes: CreateProductDto){
         const oldProduct = await this.findOne(id);
-        const updateProduct = await this.productRepo.merge(oldProduct, cambios);
+        const updateProduct = await this.productRepo.merge(oldProduct, changes);
         return this.productRepo.save(updateProduct);
     }
 }

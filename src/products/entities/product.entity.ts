@@ -26,12 +26,12 @@ export class Product {
   created_at: Date;
 
   @Column({ type: 'int4', nullable: false })
-  categoria_id: number;
+  category_id: number;
 
   @Column({ type: 'int4', nullable: true })
-  proveedor_id: number;
+  supplier_id: number;
 
   @Column({type: 'int4', nullable: false})
-  empleado_id: number;
+  user_id: number;
 
 }
