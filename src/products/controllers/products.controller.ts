@@ -1,42 +1,46 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  ParseIntPipe,
+  Delete,
+  Patch,
+} from '@nestjs/common';
 import { ProductsService } from '../services/products.service';
 import { CreateProductDto } from '../dto/product.dto';
 
 @Controller('products')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(private readonly productsServices: ProductsService) {}
 
   @Post()
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+  async create(@Body() productDto: CreateProductDto) {
+    return await this.productsServices.create(productDto);
   }
 
   @Get()
   findAll() {
-    return this.productsService.findAll();
+    return this.productsServices.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe)id: number) {
-    return this.productsService.findOne(id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.productsServices.findOne(id);
   }
-
- 
-  @Patch(':id')
-  update(
-    @Param('id', ParseIntPipe)id: number,
-    @Body()createProductDto :CreateProductDto,
-        
-  )
-  {
-    return this.productsService.update(id, createProductDto)
-  }
-
 
   @Delete(':id')
-    remove(@Param('id', ParseIntPipe)id: number){
-    return this.productsService.remove(id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.productsServices.remove(id);
   }
 
   
+  @Patch(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() createProductDto: CreateProductDto,
+  ) {
+    return this.productsServices.update(id, createProductDto);
+  }
 }

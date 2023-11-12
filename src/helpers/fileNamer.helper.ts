@@ -9,7 +9,6 @@ export const fileNamer = (
     
         const fileExtension = file.mimetype.split('/')[1];
 
-        //creo una interpolacion, uniendo uuid con la extension del archivo
         const fileNamer = `${id()}.${fileExtension}`;
 
         // retornar el nombre del archivo

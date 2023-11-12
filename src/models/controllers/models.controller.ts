@@ -4,7 +4,7 @@ import { CreateModelDto } from "../dto/model.dto";
 
 
 @Controller('models')
-export class ModelController
+export class ModelsController
 {
     constructor(private readonly modelsService:ModelsService){}
     @Post()

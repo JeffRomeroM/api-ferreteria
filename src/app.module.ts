@@ -9,6 +9,7 @@ import { FilesModule } from './files/files.module';
 import { UsersModule } from './users/users.module';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { CustomersModule } from './customers/customers.module';
+import { ModelsModule } from './models/models.module';
 
 @Module({
   imports: [
@@ -18,13 +19,14 @@ import { CustomersModule } from './customers/customers.module';
       port: 5432,
       username: 'postgres',
       password: '090202',
-      database: 'db_ferreteria',
+      database: 'ferreteria',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
     ProductsModule,
     CategoriesModule,
     BrandsModule,
+    ModelsModule,
     FilesModule,
     UsersModule,
     SuppliersModule,

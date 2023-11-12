@@ -9,7 +9,7 @@ export class User {
   @Column({ type: 'varchar', length: 100, nullable: false })
   name: string;
 
-  @Column({ type: 'varchar', length: 30, nullable: false })
+  @Column({ type: 'varchar', length: 100, nullable: false })
   password: string;
 
   @Column({ type: 'varchar', nullable: false })
@@ -18,8 +18,8 @@ export class User {
   @Column({ type: 'varchar', nullable: false })
   gender: string;
 
-  @Column({ type: 'varchar', nullable: false })
-  role: string;
+  @Column({ type: 'text', array: true, default: ['user'] })
+  role: string[];
 
   @Column({ type: 'varchar',  nullable: true })
   filename: string;

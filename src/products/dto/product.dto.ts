@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsArray, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class CreateProductDto {
   @IsNotEmpty()
@@ -35,6 +35,10 @@ export class CreateProductDto {
   @IsOptional()
   user_id: number;
 
+  @IsNumber()
+  @IsOptional()
+  model_id: number;
+
   @IsString()
   @IsOptional()
   filename: string;
@@ -42,5 +46,10 @@ export class CreateProductDto {
   @IsDateString()
   @IsOptional()
   created_at: string;
+
+  @IsArray({ each: true })
+  @IsString()
+  @IsOptional()
+  images?: string[];
 
 }

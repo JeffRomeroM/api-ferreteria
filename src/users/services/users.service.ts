@@ -20,17 +20,18 @@ export class UsersService{
         private readonly dataSource: DataSource,
     ){}
 
-    async create(userDto:CreateUserDto){
-        const { images = [], ...detailsUser} = userDto;
-
+     
+    async create(createUserDto: CreateUserDto) {
+        const { images = [], password, ...detailUser } = createUserDto;
         const user = await this.userRepo.create({
-            ...detailsUser,
-            images: images.map((image) => this.userImageRepo.create({ url: image }),
-            ),
+          ...detailUser,
+          password: bcrypt.hashSync(password, 10),
+          images: images.map((image) => this.userImageRepo.create({ url: image })),
         });
-        await  this.userRepo.save(user);
+    
+        await this.userRepo.save(user);
         return user;
-    }
+      }
 
 
     async login(login: LoginUserDto) {
@@ -45,7 +46,6 @@ export class UsersService{
             'Credenciales no válidas, correo no encontrado',
           );
         }
-        //Comparar si la password ingresada es la misma que está en la bd
         if (!bcrypt.compareSync(password, user.password)) {
           throw new UnauthorizedException(
             'Credenciales no válidas, password incorrecta',
@@ -81,17 +81,14 @@ export class UsersService{
     }
 
     //actualizar un usuario con imagenes
-    async update(id: number, cambios: CreateUserDto){
-        const {images, ...updateAll } = cambios;
+    async update(id: number, changes: CreateUserDto){
+        const {images, ...updateAll } = changes;
         const user = await this.userRepo.preload({
             id: id,
-            //Spread Operator(operador para esparcir)
-            ...updateAll,//Esparcir todos los datos del usuario
             
-
-        
+            ...updateAll,//Esparcir todos los datos del usuario
         });
-        //correr el queryRunner
+     
 
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
@@ -106,7 +103,7 @@ export class UsersService{
             this.userImageRepo.create({ url: image }),
             );
         } else {
-            user.images = await this.userImageRepo.findBy({ user: { id }});
+          user.images = await this.userImageRepo.findBy({ user: { id }});
         }
         await queryRunner.manager.save(user);
 

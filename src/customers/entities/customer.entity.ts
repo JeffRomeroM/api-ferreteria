@@ -19,5 +19,5 @@ export class Customer {
   @Column({ type: 'varchar', nullable: true })
   type: string;
 
-
+  
 }

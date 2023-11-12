@@ -23,6 +23,8 @@ export class CustomersService{
         return this.customerRepo.findOneBy({id})
     }
 
+    
+
     //mostrar todos los clientes
     findAll(){
         return   this.customerRepo.find({
